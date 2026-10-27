@@ -13,8 +13,10 @@ const postRoutes = require("./routes/postRoutes");
 const adminRoutes = require("./routes/adminRoutes");
 const aiRoutes = require("./routes/aiRoutes");
 
-// Connect to MongoDB
-connectDB();
+// Connect to MongoDB (catch error so serverless startup does not crash)
+connectDB().catch((err) => {
+  console.warn("Initial DB connection warning:", err.message);
+});
 
 const app = express();
 
